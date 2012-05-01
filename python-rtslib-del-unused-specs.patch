@@ -1,0 +1,117 @@
+commit f62302769b8fed100ea9ca94ceb909ae72c1ce69
+Author: Andy Grover <agrover@redhat.com>
+Date:   Sun Jul 31 16:06:48 2011 -0700
+
+    remove unused fabric specs
+    
+    Once these are supported, we will want to put them back in place.
+    
+    Signed-off-by: Andy Grover <agrover@redhat.com>
+
+diff --git a/specs/ib_srpt.spec b/specs/ib_srpt.spec
+deleted file mode 100644
+index e42eec9..0000000
+--- a/specs/ib_srpt.spec
++++ /dev/null
+@@ -1,32 +0,0 @@
+-# The ib_srpt fabric module specfile.
+-#
+-# This file is part of RTSLib Community Edition.
+-# Copyright (c) 2011 by RisingTide Systems LLC
+-#
+-# This program is free software: you can redistribute it and/or modify
+-# it under the terms of the GNU Affero General Public License as
+-# published by the Free Software Foundation, version 3 (AGPLv3).
+-#
+-# This program is distributed in the hope that it will be useful,
+-# but WITHOUT ANY WARRANTY; without even the implied warranty of
+-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-# GNU Affero General Public License for more details.
+-#
+-# You should have received a copy of the GNU Affero General Public License
+-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-
+-# The fabric module feature set
+-features = acls
+-
+-# Non-standard module naming scheme
+-kernel_module = ib_srpt
+-
+-# The module uses hardware addresses from there
+-wwn_from_files = /sys/class/infiniband/*/ports/*/gids/0
+-# Transform 'fe80:0000:0000:0000:0002:1903:000e:8acd' WWN notation to
+-# '0x00000000000000000002c903000e8acd'
+-wwn_from_files_filter = "sed -e s/fe80/0x0000/ -e 's/\://g'"
+-
+-# The configfs group
+-configfs_group = srpt
+-
+diff --git a/specs/iscsi.spec b/specs/iscsi.spec
+deleted file mode 100644
+index dd03319..0000000
+--- a/specs/iscsi.spec
++++ /dev/null
+@@ -1,29 +0,0 @@
+-# The iscsi fabric module specfile.
+-#
+-# This file is part of RTSLib Community Edition.
+-# Copyright (c) 2011 by RisingTide Systems LLC
+-#
+-# This program is free software: you can redistribute it and/or modify
+-# it under the terms of the GNU Affero General Public License as
+-# published by the Free Software Foundation, version 3 (AGPLv3).
+-#
+-# This program is distributed in the hope that it will be useful,
+-# but WITHOUT ANY WARRANTY; without even the implied warranty of
+-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-# GNU Affero General Public License for more details.
+-#
+-# You should have received a copy of the GNU Affero General Public License
+-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-
+-# The iscsi fabric module features set.
+-features = discovery_auth, acls, acls_auth, nps, tpgts
+-
+-# Obviously, this module uses IQN strings as WWNs.
+-wwn_type = iqn
+-
+-# This is default too
+-# kernel_module = iscsi_target_mod
+-
+-# The configfs group name, default too
+-# configfs_group = iscsi
+-
+diff --git a/specs/qla2xxx.spec b/specs/qla2xxx.spec
+deleted file mode 100644
+index d47dcfa..0000000
+--- a/specs/qla2xxx.spec
++++ /dev/null
+@@ -1,28 +0,0 @@
+-# The qla2xxx fabric module specfile.
+-#
+-# This file is part of RTSLib Community Edition.
+-# Copyright (c) 2011 by RisingTide Systems LLC
+-#
+-# This program is free software: you can redistribute it and/or modify
+-# it under the terms of the GNU Affero General Public License as
+-# published by the Free Software Foundation, version 3 (AGPLv3).
+-#
+-# This program is distributed in the hope that it will be useful,
+-# but WITHOUT ANY WARRANTY; without even the implied warranty of
+-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-# GNU Affero General Public License for more details.
+-#
+-# You should have received a copy of the GNU Affero General Public License
+-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-
+-# The qla2xxx fabric module feature set
+-features = acls
+-
+-# Non-standard module naming scheme
+-kernel_module = tcm_qla2xxx
+-
+-# The module uses hardware addresses from there
+-wwn_from_files = /sys/class/fc_host/host*/port_name
+-
+-# Transform '0x1234567812345678' WWN notation to '12:34:56:78:12:34:56:78'
+-wwn_from_files_filter = "sed -e s/0x// -e 's/../&:/g' -e s/:$//"

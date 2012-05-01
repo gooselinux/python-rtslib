@@ -1,0 +1,13 @@
+diff --git a/rtslib/__init__.py b/rtslib/__init__.py
+index b59eba6..7de59fb 100644
+--- a/rtslib/__init__.py
++++ b/rtslib/__init__.py
+@@ -28,7 +28,7 @@ from tcm import FileIOStorageObject, IBlockStorageObject
+ from tcm import PSCSIBackstore, RDDRBackstore, RDMCPBackstore
+ from tcm import PSCSIStorageObject, RDDRStorageObject, RDMCPStorageObject
+ 
+-__version__ = 'GIT_VERSION'
++__version__ = '644eece'
+ __author__ = "Jerome Martin <jxm@risingtidesystems.com>"
+ __url__ = "http://www.risingtidesystems.com"
+ __description__ = "API for RisingTide Systems generic SCSI target."
